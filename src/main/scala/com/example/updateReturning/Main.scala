@@ -14,6 +14,7 @@ object Main extends App {
   using(Database.forConfig("db")) { implicit db =>
 
     val createSchemaAndPopulate = for {
+      _ <- sqlu"drop table if exists users;"
       _ <- users.schema.create
       _ <- users ++= Seq(
         User("Ann")
